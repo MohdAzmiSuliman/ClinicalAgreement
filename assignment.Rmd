@@ -1,0 +1,96 @@
+---
+title: "Assignment"
+author: "Mohd Azmi"
+date: "29/04/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Environment
+
+## Library
+
+```{r}
+library(pacman)
+p_load(irr, psych, haven, tidyverse)
+```
+
+## Dataset
+
+```{r}
+agreement_data <- read_sav("agreement data.sav")
+agreementds <- agreement_data %>% select(rater1, rater2, rater3, rater4, rater5)
+agreementds
+```
+
+# Analysis
+
+## 2-way random - consistency - single measure
+
+```{r}
+icc(agreementds, model = "twoway", type = "consistency", unit = "single")
+```
+
+## 2-way random - consistency - average
+
+```{r}
+icc(agreementds, model = c("twoway"), type = c("consistency"), unit = c("average"))
+
+```
+
+## 2-way random - agreement - single
+
+```{r}
+icc(agreementds, model = c("twoway"), type = c("agreement"), unit = c("single"))
+```
+
+
+## 2-way random - agreement - average
+
+```{r}
+icc(agreementds, model = c("twoway"), type = c("agreement"), unit = c("average"))
+```
+
+## 1-way random - consistency - single measure
+
+```{r}
+icc(agreementds, model = "oneway", type = "consistency", unit = "single")
+```
+
+## 1-way random - consistency - average
+
+```{r}
+icc(agreementds, model = c("oneway"), type = c("consistency"), unit = c("average"))
+
+```
+
+## 1-way random - agreement - single
+
+```{r}
+icc(agreementds, model = c("oneway"), type = c("agreement"), unit = c("single"))
+```
+
+
+## 1-way random - agreement - average
+
+```{r}
+icc(agreementds, model = c("oneway"), type = c("agreement"), unit = c("average"))
+```
+
+
+# Task 2
+
+```{r}
+pathds <- matrix(c(40,4,2,30), ncol=2, byrow = T)
+cohen.kappa(pathds)
+```
+
+# Task 3
+
+```{r}
+docds <- matrix(c(40,4,3,2,30,2,1,1,20), ncol=3, byrow = T)
+cohen.kappa(docds)
+```
